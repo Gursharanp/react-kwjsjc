@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useMemo,useState} from 'react'
 
 function Main(){
   const[counter1,setConter1]=useState(0)
@@ -10,11 +10,13 @@ const incrementOne=()=>{
 const incrementTwo=()=>{
   setConter2(counter2+1);
 }
-const isEven=() =>{
+
+
+const isEven=useMemo(() =>{
   let i=0
-  while(i<20000000000)i++
+  while(i<2000000000)i++
   return counter1%2==0
-}
+},[counter1])
 
 return(
 <div>
@@ -22,7 +24,7 @@ return(
       <button onClick={incrementOne}>
         counter1 {counter1}
       </button>
-      <span>{isEven()? 'Even':'Odd'} </span>
+      <span>{isEven? 'Even':'Odd'} </span>
     </div>
     <div>
     <button onClick={incrementTwo}>
